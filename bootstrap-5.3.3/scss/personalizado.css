@@ -523,12 +523,13 @@ header {
   position: absolute;
   top: 121px;
   left: 0;
-  width: 99.3vw; /* Usar el ancho visible sin desbordar */
+  width: 100%; /* Usar el ancho visible sin desbordar */
   height: 10px; /* Grosor de la línea */
   pointer-events: none; /* Evita que interfiera con los elementos interactivos */
 }
 
-@media (max-width: 768px) { /* Se oculta en pantallas de hasta 768px */
+@media (max-width: 768px) {
+  /* Se oculta en pantallas de hasta 768px */
   #canvas {
     display: none;
   }
