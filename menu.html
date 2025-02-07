@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Iberican Burger - Inicio</title>
+  <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
+  <link rel="stylesheet" href="bootstrap-5.3.3/scss/personalizado.css" />
+  <link rel="stylesheet" href="bootstrap-5.3.3/scss/bootstrap.css" />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const idiomaSelector = document.getElementById("language-toggle");
+      const idiomaLabel = document.getElementById("language-label");
+
+      idiomaSelector.addEventListener("click", () => {
+        // Cambiar entre ES y EN
+        const nuevoIdioma = idiomaLabel.textContent === "ES" ? "en" : "es";
+        idiomaLabel.textContent = nuevoIdioma.toUpperCase();
+
+        // Seleccionar todos los elementos con data-es y data-en
+        const elementos = document.querySelectorAll("[data-es][data-en]");
+
+        elementos.forEach((elemento) => {
+          const texto = elemento.getAttribute(`data-${nuevoIdioma}`);
+
+          if (
+            elemento.tagName === "INPUT" ||
+            elemento.tagName === "TEXTAREA"
+          ) {
+            // Cambiar el placeholder para inputs y textareas
+            elemento.placeholder = texto;
+          } else if (elemento.querySelector("i")) {
+            // Si el elemento tiene un ícono, limpiar nodos de texto previos y agregar texto nuevo
+            const icono = elemento.querySelector("i");
+
+            // Eliminar todos los nodos de texto excepto el ícono
+            const nodes = Array.from(elemento.childNodes).filter(
+              (node) => node !== icono
+            );
+            nodes.forEach((node) => elemento.removeChild(node));
+
+            // Agregar el nuevo texto
+            elemento.appendChild(document.createTextNode(` ${texto}`));
+          } else {
+            // Cambiar el texto directamente para otros elementos
+            elemento.textContent = texto;
+          }
+        });
+      });
+
+      // Cambiar el idioma inmediatamente al cargar la página
+      idiomaSelector.click();
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Evento para abrir/cerrar la información nutricional al pulsar el botón "<i class="fa-solid fa-info"></i>"
+      document.querySelectorAll(".info-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const infoBox = e.target
+            .closest(".card-grupal")
+            .querySelector(".nutritional-info");
+          infoBox.classList.toggle("d-none");
+        });
+      });
+    });
+  </script>
+  <!-- Boton para volver a arriba -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const backToTopButton = document.getElementById("back-to-top");
+
+      const toggleBackToTop = () => {
+        if (window.scrollY > 300) {
+          // Ajustar la cantidad de scroll necesaria
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      };
+
+      window.addEventListener("scroll", toggleBackToTop);
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    });
+  </script>
+  <!-- Lazy Load Lozad Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = lozad(); // Inicia el lazy load
+      observer.observe();
+    });
+  </script>
+  <!-- AOS Scroll Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+</head>
+
+<body>
+  <header class="bg-dark">
+    <nav class="navbar navbar-expand-xl py-3">
+      <div class="container">
+        <!-- Logotipo -->
+        <a class="navbar-brand text-warning fw-bold" href="index.html">
+          <img src="./img/logo.png" alt="Logo" id="logo" class="d-inline-block align-text-center me-2" />
+          Iberican<span class="text-danger">Burger</span>
+        </a>
+
+        <!-- Botón Colapsable -->
+        <button class="navbar-toggler text-warning border-0" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+
+        <!-- Menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto text-center">
+            <li class="nav-item">
+              <a class="custom-btn btn-lg" href="index.html" data-es="Inicio" data-en="Home">
+                <i class="fas fa-home"></i> Inicio
+              </a>
+            </li>
+            <!-- Menú con Submenú -->
+            <li class="nav-item dropdown">
+              <a class="custom-btn btn-lg dropdown-toggle" href="#" id="menuDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" data-es="Menú" data-en="Menu">
+                <i class="fas fa-utensils"></i> Menú
+              </a>
+              <ul class="dropdown-menu text-center" aria-labelledby="menuDropdown">
+                <li>
+                  <a class="dropdown-item" href="menu.html#hamburguesas" data-es="Hamburguesas"
+                    data-en="Burgers">Hamburguesas</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="menu.html#bocadillos" data-es="Bocadillos"
+                    data-en="Sandwiches">Bocadillos</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="menu.html#entrantes" data-es="Entrantes"
+                    data-en="Entrants">Entrantes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="menu.html#postres" data-es="Postres" data-en="Desserts">Postres</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="custom-btn btn-lg" href="contacto.html" data-es="Contacto" data-en="Contact">
+                <i class="fas fa-envelope"></i> Contacto
+              </a>
+            </li>
+          </ul>
+
+          <!-- Botones adicionales -->
+          <div class="d-flex justify-content-center align-items-center flex-wrap mt-3 mt-lg-0 gap-2">
+            <!-- Botón de Pedido -->
+            <a href="#" class="btn btn-danger btn-lg px-4 py-2" data-bs-toggle="popover" data-bs-placement="bottom"
+              data-bs-content="Ahora mismo no está disponible." onclick="event.preventDefault();"
+              data-es="¡Pedir Ahora!" data-en="Order Now!">
+              <i class="fas fa-hamburger"></i> ¡Pedir Ahora!
+            </a>
+
+            <!-- Selector de Idioma -->
+            <button class="btn btn-light btn-lg" data-toggle="tooltip" data-placement="down"
+              title="Cambiar idioma/Change language" id="language-toggle">
+              <i class="fas fa-flag"></i> <span id="language-label">EN</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <canvas id="canvas"></canvas>
+
+
+    <div class="container mt-5" id="hamburgueras">
+      <h2 class="text-center mb-4 menu-fuente" data-es="Hamburguesas Principales" data-en="Main Burgers">
+        Hamburguesas Principales
+      </h2>
+      <div class="row d-flex flex-wrap">
+        <!-- Tarjeta de Hamburguesa La Brava -->
+        <!-- Card La Brava -->
+        <div class="col-md-6 col-lg-4 mb-4 d-flex">
+          <div class="card-grupal position-relative cristal">
+            <img src="./img/labrava_borde2.webp" class="lozad card-img-top img-fluid" alt="La Brava" />
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombres" data-es="LA BRAVA" data-en="THE BRAVA">
+                LA BRAVA
+              </h5>
+              <p class="card-text" data-es="Carne de cerdo ibérico al grill con un toque picante."
+                data-en="Grilled Iberian pork with a spicy touch.">
+                Carne de cerdo ibérico al grill con un toque picante.
+              </p>
+            </div>
+            <!-- Botón de Información con data-nombre -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-nombre="La Brava"
+              data-toggle="tooltip" title="Información Nutricional">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Contenedor donde se insertará la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4 d-flex">
+          <div class="card-grupal position-relative cristal">
+            <img src="./img/castana_borde2.webp" class="card-img-top img-fluid" alt="Castaña" />
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombres">CASTAÑA</h5>
+              <p class="card-text" data-es="Carne de cerdo ibérico con crema de castañas."
+                data-en="Iberian pork with chestnut cream.">
+                Carne de cerdo ibérico con crema de castañas.
+              </p>
+            </div>
+            <!-- Botón de Información -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+              data-placement="down" title="Información Nutricional/Nutritional information">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Contenedor donde se insertará la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Hamburguesa Sierra -->
+        <!-- Card Sierra -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card-grupal position-relative cristal">
+            <img src="./img/sierra_borde2.webp" class="card-img-top img-fluid" alt="Sierra" />
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombres" data-es="SIERRA" data-en="SIERRA">
+                SIERRA
+              </h5>
+              <p class="card-text" data-es="Carne de cerdo ibérico con setas de temporada."
+                data-en="Iberian pork with seasonal mushrooms.">
+                Carne de cerdo ibérico con setas de temporada.
+              </p>
+            </div>
+            <!-- Botón de Información con data-nombre -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-nombre="Sierra"
+              data-toggle="tooltip" data-placement="down" title="Más información" aria-label="Más información">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Contenedor para la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Hamburguesa Iberican Xtreme -->
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card-grupal position-relative cristal">
+            <img src="./img/xtreme_borde2.png" class="card-img-top img-fluid" alt="IBERICAN XTREME" />
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombres">IBERICAN XTREME</h5>
+              <p class="card-text" data-es="Carne de cerdo ibérico con queso curado, jamón ibérico y pan artesanal."
+                data-en="Iberian pork with cured cheese, Iberian ham, and artisanal bread.">
+                Carne de cerdo ibérico con queso curado, jamón ibérico y pan
+                artesanal.
+              </p>
+            </div>
+            <!-- Botón de Información -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+              data-placement="down" title="Información Nutricional/Nutritional information">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Información Nutricional (oculta) -->
+            <!-- Contenedor para la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bocadillos -->
+    <div class="container mt-5" id="bocadillos">
+      <h2 class="text-center mb-4 menu-fuente" data-es="Bocadillos" data-en="Sandwiches">
+        Bocadillos
+      </h2>
+      <div class="row d-flex flex-wrap">
+        <div class="col-md-6 col-lg-4 mb-4 d-flex">
+          <div class="card-grupal position-relative cristal">
+            <video src="./videos/Bocadillo Iberico Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay loop
+              muted playsinline></video>
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombreslil" data-es="BOCADILLO DE JAMÓN" data-en="IBERIAN HAM SANDWICH">
+                BOCADILLO DE JAMÓN
+              </h5>
+              <p class="card-text" data-es="Jamón ibérico de bellota con pan artesanal recién horneado."
+                data-en="Iberian acorn-fed ham with freshly baked artisanal bread.">
+                Jamón ibérico de bellota con pan artesanal recién horneado.
+              </p>
+            </div>
+            <!-- Botón de Información -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+              data-placement="down" title="Información Nutricional/Nutritional information">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Contenedor para la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4 d-flex">
+          <div class="card-grupal position-relative cristal">
+            <video src="./videos/Bocadillo_Serrano_Lowbitrate.mp4" class="lozad card-img-top img-fluid"
+              autoplay loop muted playsinline></video>
+            <div class="card-body text-center">
+              <h5 class="card-title menu-fuente-nombreslil" data-es="BOCADILLO SERRANO" data-en="SERRANO HAM SANDWICH">
+                BOCADILLO SERRANO
+              </h5>
+              <p class="card-text" data-es="Jamón serrano curado con tomate rallado y aceite de oliva."
+                data-en="Cured Serrano ham with grated tomato and olive oil.">
+                Jamón serrano curado con tomate rallado y aceite de oliva.
+              </p>
+            </div>
+            <!-- Botón de Información -->
+            <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+              data-placement="down" title="Información Nutricional/Nutritional information">
+              <i class="fa-solid fa-info"></i>
+            </button>
+            <!-- Contenedor para la info nutricional -->
+            <div class="nutritional-info d-none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrantes -->
+      <div class="container mt-5" id="entrantes">
+        <h2 class="text-center mb-4 menu-fuente" data-es="Entrantes Principales" data-en="Main Entrees">
+          Entrantes Principales
+        </h2>
+        <div class="row d-flex flex-wrap">
+          <div class="col-md-6 col-lg-4 mb-4 d-flex">
+            <div class="card-grupal position-relative cristal">
+              <video src="./videos/Croquetas Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay loop
+                muted playsinline></video>
+              <div class="card-body text-center">
+                <h5 class="card-title menu-fuente-nombreslil" data-es="CROQUETAS DE JAMÓN IBÉRICO"
+                  data-en="IBERIAN HAM CROQUETTES">
+                  CROQUETAS DE JAMÓN IBÉRICO
+                </h5>
+                <p class="card-text" data-es="Croquetas crujientes por fuera y cremosas por dentro, con jamón ibérico."
+                  data-en="Crispy croquettes with creamy béchamel and Iberian ham.">
+                  Croquetas crujientes por fuera y cremosas por dentro, con
+                  jamón ibérico.
+                </p>
+              </div>
+              <!-- Botón de Información -->
+              <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+                data-placement="down" title="Información Nutricional/Nutritional information">
+                <i class="fa-solid fa-info"></i>
+              </button>
+              <!-- Información Nutricional (oculta) -->
+              <!-- Contenedor para la info nutricional -->
+              <div class="nutritional-info d-none"></div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4 d-flex">
+            <div class="card-grupal position-relative cristal">
+              <video src="./videos/Queso Cabra Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay
+                loop muted playsinline></video>
+              <div class="card-body text-center">
+                <h5 class="card-title menu-fuente-nombreslil" data-es="QUESO DE CABRA AL HORNO"
+                  data-en="BAKED GOAT CHEESE">
+                  QUESO DE CABRA AL HORNO
+                </h5>
+                <p class="card-text" data-es="Queso de cabra gratinado al horno con miel y nueces."
+                  data-en="Oven-baked goat cheese with honey and walnuts.">
+                  Queso de cabra gratinado al horno con miel y nueces.
+                </p>
+              </div>
+              <!-- Botón de Información -->
+              <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+                data-placement="down" title="Información Nutricional/Nutritional information">
+                <i class="fa-solid fa-info"></i>
+              </button>
+              <!-- Contenedor para la info nutricional -->
+              <div class="nutritional-info d-none"></div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4 d-flex">
+            <div class="card-grupal position-relative cristal">
+              <video src="./videos/Patatas Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay loop
+                muted playsinline></video>
+              <div class="card-body text-center">
+                <h5 class="card-title menu-fuente-nombreslil" data-es="PATATAS IBERICAN" data-en="IBERICAN FRIES">
+                  PATATAS IBERICAN
+                </h5>
+                <p class="card-text" data-es="Patatas fritas caseras con panceta, salsa brava y alioli."
+                  data-en="Homemade fries with crispy bacon, brava sauce, and aioli.">
+                  Patatas fritas caseras con panceta, salsa brava y alioli.
+                </p>
+              </div>
+              <!-- Botón de Información -->
+              <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+                data-placement="down" title="Información Nutricional/Nutritional information">
+                <i class="fa-solid fa-info"></i>
+              </button>
+              <!-- Contenedor para la info nutricional -->
+              <div class="nutritional-info d-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Postres -->
+      <div class="container mt-5" id="postres">
+        <h2 class="text-center mb-4 menu-fuente" data-es="Postres" data-en="Desserts">
+          Postres
+        </h2>
+        <div class="row d-flex flex-wrap">
+          <div class="col-md-6 col-lg-4 mb-4 d-flex">
+            <div class="card-grupal position-relative cristal">
+              <video src="./videos/Cheesecake Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay
+                loop muted playsinline></video>
+              <div class="card-body text-center">
+                <h5 class="card-title menu-fuente-nombreslil" data-es="TARTA DE QUESO CON MIEL DE ENCINA"
+                  data-en="CHEESECAKE WITH HOLM OAK HONEY">
+                  TARTA DE QUESO CON MIEL DE ENCINA
+                </h5>
+                <p class="card-text"
+                  data-es="Tarta de queso suave con miel y nueces. Un postre cremoso con sabores locales."
+                  data-en="Smooth cheesecake with honey and walnuts. A creamy dessert with local flavors.">
+                  Tarta de queso suave con miel y nueces. Un postre cremoso con
+                  sabores locales.
+                </p>
+              </div>
+              <!-- Botón de Información -->
+              <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+                data-placement="down" title="Información Nutricional/Nutritional information">
+                <i class="fa-solid fa-info"></i>
+              </button>
+              <!-- Contenedor para la info nutricional -->
+              <div class="nutritional-info d-none"></div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4 d-flex">
+            <div class="card-grupal position-relative cristal">
+              <video src="./videos/Flan Castana Lowbirate.mp4" class="lozad card-img-top img-fluid" autoplay
+                loop muted playsinline></video>
+              <div class="card-body text-center">
+                <h5 class="card-title menu-fuente-nombreslil" data-es="FLAN DE CASTAÑAS" data-en="CHESTNUT FLAN">
+                  FLAN DE CASTAÑAS
+                </h5>
+                <p class="card-text"
+                  data-es="Flan casero de castañas con textura suave y un toque dulce, coronado con caramelo casero."
+                  data-en="Homemade chestnut flan with a smooth texture, lightly sweet taste, and topped with homemade caramel.">
+                  Flan casero de castañas con textura suave y un toque dulce,
+                  coronado con caramelo casero.
+                </p>
+              </div>
+              <!-- Botón de Información -->
+              <button class="btn btn-danger btn-sm info-btn position-absolute top-0 end-0 m-2" data-toggle="tooltip"
+                data-placement="down" title="Información Nutricional/Nutritional information">
+                <i class="fa-solid fa-info"></i>
+              </button>
+              <!-- Contenedor para la info nutricional -->
+              <div class="nutritional-info d-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Boton para volver a arriba -->
+    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </main>
+  <footer class="bg-dark py-4">
+    <div class="container">
+      <div class="row">
+        <!-- Logotipo y Nombre -->
+        <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+          <a class="navbar-brand text-warning fw-bold" href="index.html">
+            <img src="./img/logo.png" alt="Logo" class="d-inline-block align-text-center" />
+            Iberican<span class="text-danger">Burger</span>
+          </a>
+          <p class="text-white mt-2" data-es="La mejor experiencia de hamburguesas gourmet."
+            data-en="The best gourmet burger experience.">
+            La mejor experiencia de hamburguesas gourmet.
+          </p>
+        </div>
+
+        <!-- Menú Rápido -->
+        <div class="col-md-4 text-center">
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <a href="index.html" class="text-white text-decoration-none" data-es="Inicio" data-en="Home">
+                <i class="fas fa-home"></i> Inicio
+              </a>
+            </li>
+            <li class="mb-2">
+              <a href="menu.html" class="text-white text-decoration-none" data-es="Menú" data-en="Menu">
+                <i class="fas fa-utensils"></i> Menú
+              </a>
+            </li>
+            <li>
+              <a href="contacto.html" class="text-white text-decoration-none" data-es="Contacto" data-en="Contact">
+                <i class="fas fa-envelope"></i> Contacto
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="col-md-4 text-center text-md-end">
+          <p class="text-white mb-2" data-es="Síguenos en redes sociales:" data-en="Follow us on social media:">
+            Síguenos en redes sociales:
+          </p>
+          <div class="social-icons">
+            <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea de Separación -->
+      <hr class="bg-light my-4" />
+
+      <!-- Información de Derechos -->
+      <div class="text-center text-white">
+        <p class="mb-0" data-es="© 2024 Iberican Burger. Todos los derechos reservados."
+          data-en="© 2024 Iberican Burger. All rights reserved.">
+          © 2024 Iberican Burger. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    const popoverList = popoverTriggerList.map((popoverTriggerEl) => {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Realiza la petición para cargar el JSON
+    fetch("nutricional_info.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error en la petición: " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Recorre todas las cards que tengan un botón de info
+        document.querySelectorAll(".card-grupal").forEach((card) => {
+          const btn = card.querySelector(".info-btn");
+          if (btn) {
+            // Obtiene el nombre del producto desde el atributo data-nombre o del título de la card
+            let productoNombre = btn.getAttribute("data-nombre");
+            if (!productoNombre) {
+              productoNombre = card
+                .querySelector(".card-title")
+                .textContent.trim();
+            }
+            // Compara en minúsculas para evitar problemas de mayúsculas/minúsculas
+            const producto = data.productos.find(
+              (p) => p.nombre.toLowerCase() === productoNombre.toLowerCase()
+            );
+            if (producto) {
+              // Crea el HTML con la información nutricional
+              const infoHTML = `
+                <div class="p-3">
+                  <h5 class="text-center mb-3">Información Nutricional - ${producto.nombre}</h5>
+                  <table class="table table-sm table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Componente</th>
+                        <th>Por 100g</th>
+                        <th>Por porción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Energía</td>
+                        <td>${producto.energia_100g}</td>
+                        <td>${producto.energia_porcion}</td>
+                      </tr>
+                      <tr>
+                        <td>Calorías</td>
+                        <td>${producto.calorias_100g}</td>
+                        <td>${producto.calorias_porcion}</td>
+                      </tr>
+                      <tr>
+                        <td>Grasas</td>
+                        <td>${producto.grasas_100g}</td>
+                        <td>${producto.grasas_porcion}</td>
+                      </tr>
+                      <tr>
+                        <td>Carbohidratos</td>
+                        <td>${producto.carbohidratos_100g}</td>
+                        <td>${producto.carbohidratos_porcion}</td>
+                      </tr>
+                      <tr>
+                        <td>Proteínas</td>
+                        <td>${producto.proteinas_100g}</td>
+                        <td>${producto.proteinas_porcion}</td>
+                      </tr>
+                      <tr>
+                        <td>Ingredientes</td>
+                        <td colspan="2">${producto.ingredientes}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              `;
+              // Inserta el HTML en el contenedor de info nutricional de la card
+              const infoContainer = card.querySelector(".nutritional-info");
+              if (infoContainer) {
+                infoContainer.innerHTML = infoHTML;
+              }
+            } else {
+              console.error("Producto no encontrado para:", productoNombre);
+            }
+          }
+        });
+      })
+      .catch((error) => console.error("Error al cargar el JSON:", error));
+  });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+</script>
+<script>
+  VanillaTilt.init(document.querySelectorAll(".card-grupal img"), {
+    max: 10,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.5,
+    scale: 1.2,
+  });
+</script>
+
+<script>
+  VanillaTilt.init(document.querySelectorAll(".card-grupal video, #logo"), {
+    max: 10,
+    speed: 400,
+    glare: true,
+    "max-glare": 2,
+    scale: 1.1,
+  });
+</script>
+<script>
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+
+  // Función para ajustar el tamaño del canvas sin generar scroll lateral
+  function resizeCanvas() {
+    canvas.width = window.innerWidth; // Ajustar solo al ancho visible
+    canvas.height = 5; // Grosor de la línea
+  }
+
+  // Inicializar el tamaño del canvas correctamente
+  resizeCanvas();
+
+  let offset = 0; // Movimiento inicial
+
+  function drawLine() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas
+
+    // Definir gradiente dinámico
+    let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(0, "#ffc107");
+    gradient.addColorStop(0.5, "#ffc107");
+    gradient.addColorStop(1, "#ffc107");
+
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+
+    // Dibujo de onda dinámica
+    for (let x = 0; x < canvas.width; x++) {
+      let y = Math.sin((x + offset) * 0.01) * 3 + 3; // Efecto ondulado
+      ctx.lineTo(x, y);
+    }
+
+    ctx.stroke();
+    offset += 2;
+
+    requestAnimationFrame(drawLine);
+  }
+
+  drawLine();
+
+  // Ajustar tamaño del canvas al cambiar la ventana sin desbordar
+  window.addEventListener("resize", resizeCanvas);
+
+</script>
+
+</html>

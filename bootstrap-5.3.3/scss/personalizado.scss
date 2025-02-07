@@ -1,0 +1,756 @@
+//Variables personalizadas para fondo
+// $custom-bg-color: #c9b7b7; // Color base del fondo
+// $custom-opacity: 0.3; // Opacidad del fondo
+// $custom-radial-gradient: repeating-radial-gradient(
+//   circle at 0 0,
+//   transparent 0,
+//   #e5e5f7 10px
+// );
+// $custom-linear-gradient: repeating-linear-gradient(#00000055, #000000);
+
+@import "functions";
+@import "variables";
+@import "mixins";
+
+.feature {
+  i {
+    font-size: 2rem; /* Tamaño del ícono */
+    margin-bottom: 0.5rem;
+  }
+  h5 {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  p {
+    color: #383f46; /* Texto en tono gris */
+    font-size: 0.9rem;
+  }
+}
+
+// Variables para el botón
+$back-to-top-bg: #ffc107 !default; // Amarillo
+$back-to-top-hover: darken($back-to-top-bg, 15%) !default;
+$back-to-top-size: 60px !default;
+$back-to-top-icon-size: 28px !default;
+$back-to-top-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: $back-to-top-size;
+  height: $back-to-top-size;
+  background-color: $back-to-top-bg;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  font-size: $back-to-top-icon-size;
+  cursor: pointer;
+  box-shadow: $back-to-top-shadow;
+  transition: opacity 0.4s, transform 0.4s;
+  opacity: 0;
+  transform: scale(0.5) translateY(20px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: fadeInBounce 0.6s ease-out;
+  }
+
+  &:hover {
+    background-color: $back-to-top-hover;
+    color: white;
+    animation: hoverWiggle 0.15s infinite ease-in-out alternate; // Se mantiene vibrando
+  }
+}
+
+// Animación de entrada con rebote
+@keyframes fadeInBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(30px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.9) translateY(5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Animación de vibración constante en hover
+@keyframes hoverWiggle {
+  0% {
+    transform: scale(1.1) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.1) rotate(-2deg);
+  }
+}
+
+//animacion botones
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+//Animacion botones
+.btn,
+.custom-btn {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    animation: wiggle 0.6s ease-in-out infinite;
+  }
+}
+
+//footer
+/* Variables */
+$bg-color-dark: #343a40; /* Color de fondo oscuro */
+$text-color-light: #ffffff; /* Color de texto claro */
+$text-color-hover: #ffc107; /* Color de texto al pasar el cursor */
+$logo-max-height: 80px; /* Tamaño máximo del logotipo */
+$link-spacing: 1rem; /* Espaciado entre enlaces sociales */
+$yellow-line: 4px solid #ffc107;
+
+// Contenedor de la línea
+.footer-border-svg {
+  position: absolute;
+  bottom: 100%; // Se coloca justo arriba del footer
+  left: 0;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+}
+/* Footer */
+/* Espaciado para el Footer */
+footer {
+  margin-top: 2rem; /* Espaciado superior para separar el footer */
+  padding-top: 2rem; /* Espaciado interno superior dentro del footer */
+  background-color: $bg-color-dark;
+  color: $text-color-light;
+  border-top: $yellow-line;
+
+  a {
+    color: $text-color-light;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-color-hover; /* Color al pasar el cursor */
+    }
+  }
+
+  hr {
+    border-color: $text-color-light;
+  }
+
+  .navbar-brand img {
+    max-height: $logo-max-height; /* Tamaño del logotipo */
+  }
+
+  .social-icons a {
+    margin-right: $link-spacing; /* Espaciado entre iconos sociales */
+  }
+}
+
+body {
+  position: relative; /* Necesario para posicionar el pseudo-elemento */
+  min-height: 100vh; /* Asegura que cubra toda la ventana */
+
+  //Navegacion por teclado
+  a:focus,
+  button:focus {
+    outline: 4px solid #ff0707;
+    outline-offset: 2px;
+  }
+
+  //Boton volver arriba
+  // Variables
+  $btn-bg-color: #f8ea39; // Color de fondo del botón
+  $btn-bg-hover: #b9af25; // Color de fondo al pasar el cursor
+  $btn-color: #000; // Color del texto/icono
+  $btn-size: 70px; // Tamaño del botón
+  $btn-border-radius: 50%; // Forma redonda
+  $btn-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra
+  $btn-position: 2rem; // Margen desde los bordes
+  $btn-border: 2px solid #000000; // Borde del botón
+  // Estilo del botón
+  #btnVolverArriba {
+    position: fixed;
+    bottom: $btn-position;
+    right: $btn-position;
+    display: none; // Oculto por defecto
+    z-index: 1000; // Asegura que esté por encima del contenido
+    background-color: $btn-bg-color;
+    color: $btn-color;
+    border: none;
+    border-radius: $btn-border-radius;
+    width: $btn-size;
+    height: $btn-size;
+    justify-content: center;
+    align-items: center;
+    box-shadow: $btn-shadow;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border: $btn-border;
+
+    // Icono centrado
+    display: flex;
+    font-size: 1.2rem;
+  }
+
+  // Hover y efecto de interacción
+  #btnVolverArriba:hover {
+    background-color: $btn-bg-hover;
+    transform: scale(1.1);
+  }
+
+  // Variables para estilos
+  $btn-size: 50px;
+  $btn-bg: #ffc107;
+  $btn-hover-bg: #d89e04;
+  $btn-color: #000;
+  $btn-hover-color: #fff;
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: $btn-size;
+    height: $btn-size;
+    background-color: $btn-bg;
+    color: $btn-color;
+    border: 1px solid $btn-color;
+    border-radius: 50%;
+    display: none; // Oculto por defecto
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: $btn-hover-bg;
+      color: $btn-hover-color;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Fondo de la web */
+  // &::before {
+  //   content: ""; /* Crea el pseudo-elemento */
+  //   position: absolute; /* Asegura que se coloque detrás del contenido */
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: $custom-bg-color; /* Color base */
+  //   background-image: $custom-radial-gradient, $custom-linear-gradient;
+  //   background-blend-mode: overlay;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  //   background-attachment: fixed;
+  //   opacity: $custom-opacity; /* Aplica opacidad solo al fondo */
+  //   z-index: -1; /* Envía el fondo detrás del contenido */
+  background-image: url("../../img/fondogen.png");
+}
+
+// body {
+//     background-image: url('../../img/fondogen2.png'); /* Reemplaza con la ruta de tu imagen */
+//     background-repeat: repeat; /* Repite el patrón */
+//     background-size: auto; /* Usa el tamaño natural de la imagen */
+//     background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
+//     background-position: top left; /* Empieza desde la esquina superior izquierda */
+//   }
+
+$color-fondo-header: #1a1f50; // Color de fondo del header
+$color-borde-header: #007bff; // Color del borde del header
+
+.header {
+  .navbar {
+    border-top: 2px solid $color-borde-header; // Color del borde del header
+  }
+  img {
+    max-height: 80px; // Ajusta el tamaño del logotipo
+  }
+}
+
+.nav-tabs .nav-link {
+  background-color: #f8f9fa; /* Color de fondo claro para pestañas no activas */
+  color: #6c757d; /* Texto en gris */
+  border: 1px solid #dee2e6; /* Borde claro */
+  transition: all 0.3s ease; /* Animación suave */
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #0d6efd; /* Fondo azul para la pestaña activa */
+  color: #fff; /* Texto blanco */
+  border-color: #0d6efd; /* Borde azul */
+  font-weight: bold; /* Texto en negrita */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #e2e6ea; /* Fondo más oscuro al pasar el cursor */
+  color: #000; /* Texto negro al pasar el cursor */
+}
+
+/* nav */
+.navbar .form-control {
+  background-color: transparent;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.navbar .form-control::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.navbar .btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.navbar .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+// Variables para el efecto tallado
+$stone-text-color: #2e2a2a; // Color gris claro para el texto (superficie de piedra)
+$stone-shadow-dark: rgba(0, 0, 0, 0.4); // Sombra oscura para profundidad
+$stone-shadow-light: rgba(255, 255, 255, 0.6); // Luz en el borde superior
+$shadow-offset: 3px; // Desplazamiento de sombras
+$shadow-blur: 2px; // Difuminado de la sombra
+
+.carved-text {
+  position: relative;
+  color: $stone-text-color; // Color base del texto
+  font-weight: bold; // Texto grueso para el efecto grabado
+  font-size: 2rem; // Tamaño adecuado para visualizar el efecto
+  text-transform: uppercase; // Opcional, para que se vea más "grabado"
+  text-shadow: $shadow-offset $shadow-offset $shadow-blur $stone-shadow-dark,
+    /* Sombra oscura inferior derecha */ -$shadow-offset - $shadow-offset $shadow-blur
+      $stone-shadow-light; /* Luz superior izquierda */
+  letter-spacing: 1px; // Espaciado para mayor claridad
+}
+
+//Prueba fuente
+/* Definición de la fuente */
+@font-face {
+  font-family: "Shred Handed";
+  src: url("../../fonts/Shred-Handed.eot"); /* IE9 Compatibility */
+  src: url("../../fonts/Shred-Handed.woff2") format("woff2"),
+    /* Navegadores modernos */ url("../../fonts/Shred-Handed.woff")
+      format("woff"),
+    /* Compatibilidad adicional */ url("../../fonts/Shred-Handed.ttf")
+      format("truetype"); /* Compatibilidad general */
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Aplicación de la fuente */
+// Variables
+$font-family-main: "Shred Handed", sans-serif;
+$text-shadow-main: 3px 3px 2px rgba(255, 0, 0, 0.4),
+  -6px 2px rgba(251, 255, 0, 0.88);
+$font-size-large: 8rem;
+$font-size-medium: 3rem;
+$font-size-little: 2.1rem;
+$font-size-medium-mobile: 3.5rem; // Tamaño reducido para móviles
+$font-size-large-mobile: 6rem;
+
+// Estilo Generalizado
+.menu-fuente,
+.menu-fuente-nombres,
+.menu-fuente-nombreslil {
+  font-family: $font-family-main;
+  text-shadow: $text-shadow-main;
+}
+
+// Tamaños específicos
+.menu-fuente {
+  font-size: $font-size-large;
+  @media (max-width: 576px) {
+    font-size: $font-size-large-mobile;
+  }
+}
+
+.menu-fuente-nombres {
+  font-size: $font-size-medium;
+  // Ajuste en móviles
+  @media (max-width: 576px) {
+    font-size: $font-size-medium-mobile;
+  }
+}
+
+.menu-fuente-nombreslil {
+  font-size: $font-size-little;
+}
+
+p {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+//Efecto cristal
+// Definición de variables
+$background-opacity: 0.15;
+$border-radius: 16px;
+$box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+$backdrop-blur: 3.7px;
+$webkit-backdrop-blur: 5.7px;
+$border-color: rgba(255, 255, 255, 0.74);
+$border-width: 1px;
+
+// Estilo Cristal
+.cristal {
+  background: rgba(255, 255, 255, $background-opacity);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  backdrop-filter: blur($backdrop-blur);
+  -webkit-backdrop-filter: blur($webkit-backdrop-blur);
+  border: $border-width solid $border-color;
+}
+
+header {
+  border-bottom: 3px solid #ffc107; // Línea decorativa inferior (amarilla)
+}
+
+.navbar-brand {
+  font-size: 1.7rem !important;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #ffc107; // Color amarillo al pasar el ratón
+  }
+  img {
+    width: 80px;
+  }
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #ffc107; // Amarillo en hover
+    transform: scale(1.1); // Efecto de zoom ligero
+  }
+}
+
+.btn-danger {
+  border-radius: 25px; // Botón redondeado
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #ff5722; // Cambiar a un naranja más vibrante
+    transform: scale(1.1); // Zoom ligero en hover
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+  }
+}
+
+.navbar-toggler {
+  background-color: transparent;
+  border: none;
+  color: #ffc107;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  i {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover i {
+    transform: rotate(90deg); // Rotación del ícono de hamburguesa
+  }
+}
+
+// Variables de colores
+$btn-primary-bg: #ffc107; // Amarillo vibrante
+$btn-primary-hover-bg: #b18f2b; // Color oscuro para hover
+$btn-primary-text: #312c2c; // Texto oscuro
+$btn-primary-hover-text: #312e2e; // Texto más oscuro en hover
+
+// Contenedor para centrar botones en pantallas medianas y pequeñas
+.navbar-nav {
+  gap: 1.5rem; // Separación entre botones
+}
+
+// Estilo para los botones del menú
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem; // Espaciado interno
+  font-size: 1rem; // Tamaño del texto
+  font-weight: bold;
+  text-transform: uppercase; // Texto en mayúsculas
+  letter-spacing: 0.5px; // Separación entre letras
+  color: $btn-primary-text; // Color del texto
+  background-color: $btn-primary-bg; // Fondo principal
+  border: none; // Sin bordes
+  border-radius: 8px; // Bordes redondeados ligeros
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); // Sombra suave
+  transition: all 0.3s ease-in-out; // Transición suave
+
+  i {
+    margin-right: 0.5rem; // Espaciado entre ícono y texto
+    font-size: 1.2rem; // Tamaño del ícono
+  }
+
+  &:hover {
+    background-color: $btn-primary-hover-bg; // Fondo en hover
+    color: $btn-primary-hover-text; // Texto en hover
+    transform: translateY(-2px); // Efecto de "flotar"
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); // Sombra más pronunciada
+  }
+
+  &:active {
+    transform: translateY(1px); // Botón hundido en click
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Sombra más ligera
+  }
+}
+
+// Botón de "Pedir Ahora"
+// Variables de estilo
+$btn-danger-color: #ff5722;
+$btn-danger-shadow: rgba(255, 87, 34, 0.2);
+$btn-danger-shadow-hover: rgba(255, 87, 34, 0.4);
+$border-radius: 12px;
+$transition-duration: 0.3s;
+$scale-hover: 1.05;
+$scale-active: 0.95;
+
+// Estilo del botón
+.btn-danger {
+  border-radius: $border-radius;
+  box-shadow: 0 4px 6px $btn-danger-shadow; // Sombra suave
+  transition: all $transition-duration ease-in-out;
+
+  &:hover {
+    background-color: $btn-danger-color; // Rojo más vibrante
+    transform: scale($scale-hover); // Zoom ligero
+    box-shadow: 0 8px 15px $btn-danger-shadow-hover; // Sombra más pronunciada
+  }
+
+  &:active {
+    transform: scale($scale-active); // Botón presionado
+    box-shadow: 0 2px 4px $btn-danger-shadow;
+  }
+}
+
+// Alineación responsiva
+@media (max-width: 992px) {
+  .navbar-nav {
+    flex-direction: column; // Alinea los botones verticalmente
+  }
+
+  .btn-danger {
+    text-align: center !important; // Centrado del texto
+    text-align: center; // Centrado del texto
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: center; // Centra horizontalmente
+  align-items: center; // Alinea verticalmente
+  gap: 1rem; // Espaciado entre los botones
+  margin-top: 1rem;
+
+  a,
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px; // Tamaño uniforme para los botones
+    height: auto; // Deja que el alto se adapte al contenido
+  }
+
+  // Estilo responsivo para dispositivos pequeños
+  @media (max-width: 768px) {
+    flex-direction: column; // Apila los botones verticalmente
+    gap: 0.5rem; // Reduce el espaciado en pantallas pequeñas
+  }
+}
+
+// body,
+// html {
+//   height: 100%;
+// }
+
+// .parallax {
+//     /* The image used */
+//     background-image: url("../../img/fondogen2.png");
+
+//   /* Full height */
+//   height: 100%;
+
+//   /* Create the parallax scrolling effect */
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   }
+
+//   .parallax2 {
+//     /* The image used */
+//     background-image: url("../../img/fondogen3.png");
+
+//   /* Full height */
+//   height: 100%;
+
+//   /* Create the parallax scrolling effect */
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   }
+
+//dropdown
+// Variables para el dropdown
+// Variables para el custom dropdown
+$custom-dropdown-bg: rgba(34, 34, 34, 0.95); // Fondo oscuro translúcido
+$custom-dropdown-border-color: #ff5722; // Color del borde
+$custom-dropdown-item-bg-hover: #ffc107; // Fondo amarillo al pasar el ratón
+$custom-dropdown-item-color: #ffffff; // Color del texto
+$custom-dropdown-item-hover-color: #000000; // Color del texto al pasar el ratón
+$custom-dropdown-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); // Sombra del dropdown
+$custom-dropdown-border-radius: 0.5rem; // Bordes redondeados
+$custom-dropdown-transition: 0.3s ease; // Transición suave
+
+// Estilo personalizado para el dropdown
+.custom-dropdown-menu {
+  background-color: $custom-dropdown-bg; // Fondo oscuro translúcido
+  border: 1px solid $custom-dropdown-border-color; // Borde con color personalizado
+  border-radius: $custom-dropdown-border-radius; // Bordes redondeados
+  box-shadow: $custom-dropdown-box-shadow; // Sombra
+  transition: background-color $custom-dropdown-transition,
+    box-shadow $custom-dropdown-transition;
+
+  .custom-dropdown-item {
+    background-color: transparent; // Fondo inicial transparente
+    color: $custom-dropdown-item-color; // Color del texto inicial
+    padding: 0.5rem 1rem; // Espaciado interno
+    transition: background-color $custom-dropdown-transition,
+      color $custom-dropdown-transition;
+
+    &:hover,
+    &:focus {
+      background-color: $custom-dropdown-item-bg-hover; // Fondo amarillo al pasar el ratón
+      color: $custom-dropdown-item-hover-color; // Texto negro al pasar el ratón
+    }
+
+    &.active {
+      background-color: $custom-dropdown-item-bg-hover; // Fondo amarillo para ítems activos
+      color: $custom-dropdown-item-hover-color; // Texto negro para ítems activos
+    }
+
+    &.disabled {
+      background-color: transparent; // Fondo transparente para ítems deshabilitados
+      color: rgba($custom-dropdown-item-color, 0.5); // Texto gris
+      pointer-events: none; // Deshabilita interacción
+    }
+  }
+
+  // Divisores dentro del dropdown
+  .custom-dropdown-divider {
+    height: 1px;
+    background-color: $custom-dropdown-border-color; // Color del divisor
+    margin: 0.5rem 0; // Espaciado vertical
+  }
+
+  // Encabezados dentro del dropdown
+  .custom-dropdown-header {
+    color: lighten($custom-dropdown-item-color, 30%); // Texto más claro
+    font-weight: bold;
+    padding: 0.5rem 1rem; // Espaciado interno
+    text-transform: uppercase; // Mayúsculas
+  }
+}
+
+// Transición de aparición del dropdown
+.custom-dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px); // Animación inicial deslizándose hacia abajo
+  transition: opacity $custom-dropdown-transition,
+    transform $custom-dropdown-transition;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0); // Posición final
+  }
+}
+
+$info-btn-padding: 0.5rem;
+$info-btn-font-size: 1rem;
+$info-btn-icon-size: 1.2rem;
+
+.info-btn {
+  font-size: $info-btn-font-size;
+  padding: $info-btn-padding;
+  width: auto;
+  height: auto;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; // Opcional
+}
+
+.info-btn i {
+  font-size: $info-btn-icon-size;
+}
+
+@media (max-width: 768px) {
+  .info-btn {
+    font-size: 0.9rem; // Reduce el tamaño del texto
+    padding: 0.4rem;
+  }
+
+  .info-btn i {
+    font-size: 1rem; // Reduce el tamaño del ícono
+  }
+}
+
+// canvas animacion
+#canvas {
+  position: absolute;
+  top: 121px;
+  left: 0;
+  width: 99.3vw; /* Usar el ancho visible sin desbordar */
+  height: 10px; /* Grosor de la línea */
+  pointer-events: none; /* Evita que interfiera con los elementos interactivos */
+}

@@ -1,0 +1,368 @@
+//
+// Base styles
+//
+
+.card {
+  // scss-docs-start card-css-vars
+  --#{$prefix}card-spacer-y: #{$card-spacer-y};
+  --#{$prefix}card-spacer-x: #{$card-spacer-x};
+  --#{$prefix}card-title-spacer-y: #{$card-title-spacer-y};
+  --#{$prefix}card-title-color: #{$card-title-color};
+  --#{$prefix}card-subtitle-color: #{$card-subtitle-color};
+  --#{$prefix}card-border-width: #{$card-border-width};
+  --#{$prefix}card-border-color: #{$card-border-color};
+  --#{$prefix}card-border-radius: #{$card-border-radius};
+  --#{$prefix}card-box-shadow: #{$card-box-shadow};
+  --#{$prefix}card-inner-border-radius: #{$card-inner-border-radius};
+  --#{$prefix}card-cap-padding-y: #{$card-cap-padding-y};
+  --#{$prefix}card-cap-padding-x: #{$card-cap-padding-x};
+  --#{$prefix}card-cap-bg: #{$card-cap-bg};
+  --#{$prefix}card-cap-color: #{$card-cap-color};
+  --#{$prefix}card-height: #{$card-height};
+  --#{$prefix}card-color: #{$card-color};
+  --#{$prefix}card-bg: #{$card-bg};
+  --#{$prefix}card-img-overlay-padding: #{$card-img-overlay-padding};
+  --#{$prefix}card-group-margin: #{$card-group-margin};
+  // scss-docs-end card-css-vars
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; // See https://github.com/twbs/bootstrap/pull/22740#issuecomment-305868106
+  height: var(--#{$prefix}card-height);
+  color: var(--#{$prefix}body-color);
+  word-wrap: break-word;
+  background-color: var(--#{$prefix}card-bg);
+  background-clip: border-box;
+  border: var(--#{$prefix}card-border-width) solid
+    var(--#{$prefix}card-border-color);
+  @include border-radius(var(--#{$prefix}card-border-radius));
+  @include box-shadow(var(--#{$prefix}card-box-shadow));
+
+  > hr {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  > .list-group {
+    border-top: inherit;
+    border-bottom: inherit;
+
+    &:first-child {
+      border-top-width: 0;
+      @include border-top-radius(var(--#{$prefix}card-inner-border-radius));
+    }
+
+    &:last-child {
+      border-bottom-width: 0;
+      @include border-bottom-radius(var(--#{$prefix}card-inner-border-radius));
+    }
+  }
+
+  // Due to specificity of the above selector (`.card > .list-group`), we must
+  // use a child selector here to prevent double borders.
+  > .card-header + .list-group,
+  > .list-group + .card-footer {
+    border-top: 0;
+  }
+}
+
+.card-body {
+  // Enable `flex-grow: 1` for decks and groups so that card blocks take up
+  // as much space as possible, ensuring footers are aligned to the bottom.
+  flex: 1 1 auto;
+  padding: var(--#{$prefix}card-spacer-y) var(--#{$prefix}card-spacer-x);
+  color: var(--#{$prefix}card-color);
+}
+
+.card-title {
+  margin-bottom: var(--#{$prefix}card-title-spacer-y);
+  color: var(--#{$prefix}card-title-color);
+}
+
+.card-subtitle {
+  margin-top: calc(
+    -0.5 * var(--#{$prefix}card-title-spacer-y)
+  ); // stylelint-disable-line function-disallowed-list
+  margin-bottom: 0;
+  color: var(--#{$prefix}card-subtitle-color);
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-link {
+  &:hover {
+    text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+
+  + .card-link {
+    margin-left: var(--#{$prefix}card-spacer-x);
+  }
+}
+
+//
+// Optional textual caps
+//
+
+.card-header {
+  padding: var(--#{$prefix}card-cap-padding-y)
+    var(--#{$prefix}card-cap-padding-x);
+  margin-bottom: 0; // Removes the default margin-bottom of <hN>
+  color: var(--#{$prefix}card-cap-color);
+  background-color: var(--#{$prefix}card-cap-bg);
+  border-bottom: var(--#{$prefix}card-border-width) solid
+    var(--#{$prefix}card-border-color);
+
+  &:first-child {
+    @include border-radius(
+      var(--#{$prefix}card-inner-border-radius)
+        var(--#{$prefix}card-inner-border-radius) 0 0
+    );
+  }
+}
+
+.card-footer {
+  padding: var(--#{$prefix}card-cap-padding-y)
+    var(--#{$prefix}card-cap-padding-x);
+  color: var(--#{$prefix}card-cap-color);
+  background-color: var(--#{$prefix}card-cap-bg);
+  border-top: var(--#{$prefix}card-border-width) solid
+    var(--#{$prefix}card-border-color);
+
+  &:last-child {
+    @include border-radius(
+      0 0 var(--#{$prefix}card-inner-border-radius)
+        var(--#{$prefix}card-inner-border-radius)
+    );
+  }
+}
+
+//
+// Header navs
+//
+
+.card-header-tabs {
+  margin-right: calc(
+    -0.5 * var(--#{$prefix}card-cap-padding-x)
+  ); // stylelint-disable-line function-disallowed-list
+  margin-bottom: calc(
+    -1 * var(--#{$prefix}card-cap-padding-y)
+  ); // stylelint-disable-line function-disallowed-list
+  margin-left: calc(
+    -0.5 * var(--#{$prefix}card-cap-padding-x)
+  ); // stylelint-disable-line function-disallowed-list
+  border-bottom: 0;
+
+  .nav-link.active {
+    background-color: var(--#{$prefix}card-bg);
+    border-bottom-color: var(--#{$prefix}card-bg);
+  }
+}
+
+.card-header-pills {
+  margin-right: calc(
+    -0.5 * var(--#{$prefix}card-cap-padding-x)
+  ); // stylelint-disable-line function-disallowed-list
+  margin-left: calc(
+    -0.5 * var(--#{$prefix}card-cap-padding-x)
+  ); // stylelint-disable-line function-disallowed-list
+}
+
+// Card image
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: var(--#{$prefix}card-img-overlay-padding);
+  @include border-radius(var(--#{$prefix}card-inner-border-radius));
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+}
+
+.card-img,
+.card-img-top {
+  @include border-top-radius(var(--#{$prefix}card-inner-border-radius));
+}
+
+.card-img,
+.card-img-bottom {
+  @include border-bottom-radius(var(--#{$prefix}card-inner-border-radius));
+}
+
+//EDICION PARA LA CLASE, HAREMOS QUE SALGA UNA IMAGEN A LA DERECHA
+// Definición de variables
+$card-padding: 1.5rem;
+$gap-size: 1rem;
+$img-max-width-md: 450px;
+$img-max-width-lg: 650px;
+$img-border-radius: 0.25rem;
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+
+// Tarjeta de novedades
+.card.novedades {
+  display: flex;
+  flex-direction: row; // Imagen y contenido en fila
+  align-items: center; // Centrar verticalmente
+  gap: $gap-size; // Espaciado entre la imagen y el contenido
+
+  .card-body {
+    flex: 1; // El contenido ocupa el espacio restante
+    padding: $card-padding;
+    text-shadow: $text-shadow; // Sombras ligeras en el texto
+  }
+
+  img {
+    max-width: 50%; // Imagen escalable
+    height: auto; // Mantener proporciones
+    object-fit: cover; // Asegura que la imagen se adapte al espacio
+    border-radius: $img-border-radius; // Bordes redondeados
+    display: block; // Quita espacio en línea
+  }
+
+  // Media queries
+  @media (min-width: 1200px) {
+    img {
+      max-width: $img-max-width-md; // Tamaño máximo para pantallas medianas
+    }
+  }
+
+  @media (min-width: 1400px) {
+    img {
+      max-width: $img-max-width-lg; // Tamaño máximo para pantallas grandes
+    }
+  }
+
+  @media (max-width: 990px) {
+    flex-direction: column; // Cambiar a disposición vertical en pantallas pequeñas
+    text-align: center; // Centrar texto en pantallas pequeñas
+    img {
+      max-width: 100%; // Imagen toma el ancho completo
+    }
+  }
+}
+
+
+//Css para añadir agrupamiento de las hamburguesas
+// Define variables personalizadas si es necesario
+$card-border-radius: 0.5rem !default;
+$card-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !default;
+
+// Extiende componentes de Bootstrap
+.card-grupal {
+  position: relative;
+  border-radius: $card-border-radius;
+  box-shadow: $card-box-shadow;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-grupal .card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+.card-grupal .card-body {
+  padding: 1rem;
+  flex: 1 1 auto;
+}
+
+.info-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+}
+
+.nutritional-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.card-grupal .card-title,
+.card-grupal .card-text {
+  text-align: center;
+}
+
+//
+// Card groups
+//
+
+.card-group {
+  // The child selector allows nested `.card` within `.card-group`
+  // to display properly.
+  > .card {
+    margin-bottom: var(--#{$prefix}card-group-margin);
+  }
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+    flex-flow: row wrap;
+    // The child selector allows nested `.card` within `.card-group`
+    // to display properly.
+    > .card {
+      // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+      flex: 1 0 0%;
+      margin-bottom: 0;
+
+      + .card {
+        margin-left: 0;
+        border-left: 0;
+      }
+
+      // Handle rounded corners
+      @if $enable-rounded {
+        &:not(:last-child) {
+          @include border-end-radius(0);
+
+          .card-img-top,
+          .card-header {
+            // stylelint-disable-next-line property-disallowed-list
+            border-top-right-radius: 0;
+          }
+          .card-img-bottom,
+          .card-footer {
+            // stylelint-disable-next-line property-disallowed-list
+            border-bottom-right-radius: 0;
+          }
+        }
+
+        &:not(:first-child) {
+          @include border-start-radius(0);
+
+          .card-img-top,
+          .card-header {
+            // stylelint-disable-next-line property-disallowed-list
+            border-top-left-radius: 0;
+          }
+          .card-img-bottom,
+          .card-footer {
+            // stylelint-disable-next-line property-disallowed-list
+            border-bottom-left-radius: 0;
+          }
+        }
+      }
+    }
+  }
+}

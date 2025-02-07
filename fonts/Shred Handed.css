@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Shred Handed';
+    src: url('fonts/Shred-Handed.eot');
+    src: url('fonts/Shred-Handed.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Shred-Handed.woff2') format('woff2'),
+         url('fonts/Shred-Handed.woff') format('woff'),
+         url('fonts/Shred-Handed.ttf')  format('truetype'),
+         url('fonts/Shred-Handed.svg#Shred Handed') format('svg');
+}
