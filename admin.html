@@ -252,57 +252,61 @@
         </div>
     </div>
     <script>
+          //  Esta función cambia el contenido de la sección principal del panel de administración según la sección seleccionada.
         function cargarSeccion(seccion) {
             let titulo = document.getElementById("titulo-seccion");
             let contenido = document.getElementById("contenido-seccion");
 
             if (seccion === "dashboard") {
-                titulo.textContent = "Dashboard";
-                contenido.innerHTML = "<h3>Bienvenido al panel de administración</h3>";
+            // Cambia el título y contenido a "Dashboard"
+            titulo.textContent = "Dashboard";
+            contenido.innerHTML = "<h3>Bienvenido al panel de administración</h3>";
             } else if (seccion === "pedidos") {
-                titulo.textContent = "Pedidos";
-                contenido.innerHTML = `<div class="table-responsive">
-                <table id="orders-table" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>ID Pedido</th>
-                      <th>Cliente</th>
-                      <th>Fecha</th>
-                      <th>Estado</th>
-                      <th>Total</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
+            // Cambia el título y contenido a "Pedidos"
+            titulo.textContent = "Pedidos";
+            contenido.innerHTML = `<div class="table-responsive">
+            <table id="orders-table" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>ID Pedido</th>
+                  <th>Cliente</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Total</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
               </div>`;
-                $(document).ready(function () {
-                    $('#orders-table').DataTable({
-                        ajax: 'pedidos.json',
-                        columns: [
-                            { data: 'order_id' },
-                            { data: 'customer' },
-                            { data: 'date' },
-                            { data: 'status' },
-                            { data: 'total' },
-                            {
-                                data: null,
-                                render: function (data, type, row) {
-                                    return `
-                        <button class="btn btn-primary btn-sm" onclick="editOrder(${row.order_id})">Editar</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteOrder(${row.order_id})">Eliminar</button>`;
-                                }
-                            }
-                        ],
-                        language: {
-                            url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-                        },
-                        pagingType: "simple_numbers",
-                        responsive: true,  // Hace la tabla responsiva
-                        scrollX: true,  // Habilita desplazamiento horizontal si es necesario
-                        autoWidth: false  // Evita que se fije un ancho de columna automático
-                    });
+            // Inicializa la tabla de pedidos con DataTables
+            $(document).ready(function () {
+                $('#orders-table').DataTable({
+                ajax: 'pedidos.json', // URL del archivo JSON con los datos de los pedidos
+                columns: [
+                    { data: 'order_id' },
+                    { data: 'customer' },
+                    { data: 'date' },
+                    { data: 'status' },
+                    { data: 'total' },
+                    {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+                <button class="btn btn-primary btn-sm" onclick="editOrder(${row.order_id})">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteOrder(${row.order_id})">Eliminar</button>`;
+                    }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json' // URL del archivo de traducción al español
+                },
+                pagingType: "simple_numbers", // Tipo de paginación
+                responsive: true,  // Hace la tabla responsiva
+                scrollX: true,  // Habilita desplazamiento horizontal si es necesario
+                autoWidth: false  // Evita que se fije un ancho de columna automático
                 });
+            });
             }
         }
     </script>

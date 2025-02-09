@@ -306,123 +306,64 @@
       });
     });
   </script>
-  <!-- jQuery Script -->
+
   <script>
     $(document).ready(function () {
-      // Validación del formulario
-      $("#contactForm").on("submit", function (e) {
-        e.preventDefault(); // Prevenir el envío predeterminado
-
-        // Obtener los valores de los campos
-        const name = $("#name").val().trim();
-        const email = $("#email").val().trim();
-        const phone = $("#phone").val().trim();
-        const message = $("#message").val().trim();
-
-        // Expresiones regulares para validación
-        const nameRegex = /^[a-zA-ZÀ-ÿ\s]{3,50}$/; // Letras, acentos y mínimo 3 caracteres
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de email
-        const phoneRegex = /^\d{9}$/; // Exactamente 9 dígitos
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Mínimo 8 caracteres, incluyendo mayúscula, minúscula, número y carácter especial
-
-        // Validar Nombre
-        if (!nameRegex.test(name)) {
-          console.log(`Nombre ingresado: ${name}`); // Log para depuración
-          $("#formFeedback").html(
-            '<div class="alert alert-danger">Por favor, introduce un nombre válido (solo letras, mínimo 3 caracteres).</div>'
-          );
-          return;
-        }
-
-        // Validar Correo Electrónico
-        if (!emailRegex.test(email)) {
-          $("#formFeedback").html(
-            '<div class="alert alert-danger">Por favor, introduce un correo electrónico válido.</div>'
-          );
-          return;
-        }
-
-        // Validar Teléfono
-        if (!phoneRegex.test(phone)) {
-          $("#formFeedback").html(
-            '<div class="alert alert-danger">Por favor, introduce un número de teléfono válido (9 dígitos).</div>'
-          );
-          return;
-        }
-
-        // Validar Mensaje
-        if (message.length < 10) {
-          $("#formFeedback").html(
-            '<div class="alert alert-danger">El mensaje debe tener al menos 10 caracteres.</div>'
-          );
-          return;
-        }
-
-        // Si todas las validaciones son correctas
-        $("#formFeedback").html(
-          '<div class="alert alert-success">Formulario enviado correctamente. ¡Gracias por contactarnos!</div>'
-        );
-
-        // Opcional: limpiar el formulario después del envío
-        $("#contactForm")[0].reset();
-      });
-    });
-  </script>
-  <script>
-    $(document).ready(function () {
+      // Añadir método de validación personalizado para la contraseña
       $.validator.addMethod(
-        "passwordRegex",
-        function (value, element) {
-          return this.optional(element) ||
-            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
-        },
-        "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial."
+      "passwordRegex",
+      function (value, element) {
+        return this.optional(element) ||
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
+      },
+      "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial."
       );
 
+      // Configurar la validación del formulario de login
       $("#loginForm").validate({
-        rules: {
-          email: {
-            required: true,
-            email: true,
-          },
-          password: {
-            required: true,
-            passwordRegex: true, // Aplica el regex correctamente
-          },
+      rules: {
+        email: {
+        required: true, // Campo obligatorio
+        email: true, // Debe ser un email válido
         },
-        messages: {
-          email: {
-            required: "Por favor, introduce tu correo electrónico.",
-            email: "Por favor, introduce un correo electrónico válido.",
-          },
-          password: {
-            required: "Por favor, introduce tu contraseña.",
-            passwordRegex: "La contraseña debe incluir al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.",
-          },
+        password: {
+        required: true, // Campo obligatorio
+        passwordRegex: true, // Aplica el regex personalizado
         },
-        errorElement: "div",
-        errorPlacement: function (error, element) {
-          error.addClass("alert alert-danger mt-2 p-2"); // Estilo para los mensajes de error
-          error.insertAfter(element); // Colocar el mensaje debajo del input
+      },
+      messages: {
+        email: {
+        required: "Por favor, introduce tu correo electrónico.",
+        email: "Por favor, introduce un correo electrónico válido.",
         },
-        highlight: function (element) {
-          $(element).addClass("is-invalid");
+        password: {
+        required: "Por favor, introduce tu contraseña.",
+        passwordRegex: "La contraseña debe incluir al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.",
         },
-        unhighlight: function (element) {
-          $(element).removeClass("is-invalid");
-        },
-        submitHandler: function (form) {
-          // Verifica si la contraseña es válida antes de redirigir
-          if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test($("#password").val())) {
-            $("#formFeedback").html(
-              '<div class="alert alert-danger">La contraseña no cumple con los requisitos.</div>'
-            );
-            return;
-          }
+      },
+      errorElement: "div",
+      errorPlacement: function (error, element) {
+        error.addClass("alert alert-danger mt-2 p-2"); // Estilo para los mensajes de error
+        error.insertAfter(element); // Colocar el mensaje debajo del input
+      },
+      highlight: function (element) {
+        $(element).addClass("is-invalid"); // Añadir clase para resaltar el campo inválido
+      },
+      unhighlight: function (element) {
+        $(element).removeClass("is-invalid"); // Quitar clase de resaltar cuando el campo es válido
+      },
+      submitHandler: function (form) {
+        // Verifica si la contraseña es válida antes de redirigir
+        if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test($("#password").val())) {
+        $("#formFeedback").html(
+          '<div class="alert alert-danger">La contraseña no cumple con los requisitos.</div>'
+        );
+        return;
+        }
 
-          // Si la validación es correcta, redirigir a admin.html
-          window.location.href = "admin.html";
-        },
+        // Si la validación es correcta, redirigir a admin.html
+        window.location.href = "admin.html";
+      },
       });
     });
 
