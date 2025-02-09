@@ -533,4 +533,10 @@ header {
   #canvas {
     display: none;
   }
+}
+html,
+body {
+  opacity: 1;
+  transition: opacity 0.3s;
+  overflow-x: hidden;
 }/*# sourceMappingURL=personalizado.css.map */

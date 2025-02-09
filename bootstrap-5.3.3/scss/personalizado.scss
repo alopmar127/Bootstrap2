@@ -760,3 +760,11 @@ $info-btn-icon-size: 1.2rem;
     display: none;
   }
 }
+
+// Fix desbordamiento movil android
+html,
+body {
+  opacity: 1;
+  transition: opacity 0.3s;
+    overflow-x: hidden;
+}
