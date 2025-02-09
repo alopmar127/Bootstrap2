@@ -12,6 +12,14 @@
 @import "variables";
 @import "mixins";
 
+// Fix desbordamiento movil android
+html,
+body {
+  opacity: 1;
+  transition: opacity 0.3s;
+    overflow-x: hidden;
+}
+
 .feature {
   i {
     font-size: 2rem; /* Tamaño del ícono */
@@ -761,10 +769,3 @@ $info-btn-icon-size: 1.2rem;
   }
 }
 
-// Fix desbordamiento movil android
-html,
-body {
-  opacity: 1;
-  transition: opacity 0.3s;
-    overflow-x: hidden;
-}
