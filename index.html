@@ -94,9 +94,10 @@
           <a class="navbar-brand text-warning fw-bold" href="index.html">
             <img
               src="./img/logo.png"
-              alt="Logo"
+              alt="Logo de hamburguesa con forma de cerdo y nombre Iberican Burger."
               id="logo"
               class="d-inline-block align-text-center me-2"
+              aria-label="Iberican Burger logo con forma de hamburguesa y cerdo"
             />
             Iberican<span class="text-danger">Burger</span>
           </a>
@@ -259,7 +260,7 @@
 
         <div class="carousel-inner">
           <!-- Primera Imagen -->
-          <div class="carousel-item active">
+          <div class="carousel-item active" alt="Video de preparacion de la hamburguesa Iberican Xtreme con ingredientes premium.">
             <video
               class="d-block w-100"
               style="height: 400px; object-fit: cover"
@@ -267,6 +268,7 @@
               loop
               muted
               playsinline
+              aria-label="Video de preparacion de la hamburguesa Iberican Xtreme con ingredientes premium."
               poster="./img/iberican_xtreme.webp"
             >
               <source src="./videos/burgerAd1.mp4" type="video/mp4" />
@@ -293,7 +295,8 @@
             <img
               src="./img/castana_apa.webp"
               class="d-block w-100"
-              alt="La hamburguesa Castaña, con ingredientes de temporada."
+              alt="Imagen estatica de la hamburguesa Castaña, con ingredientes de temporada."
+              aria-abel="Imagen estatica de la hamburguesa Castaña, con ingredientes de temporada."
               style="height: 400px; object-fit: cover"
             />
             <div class="carousel-caption">
@@ -313,7 +316,7 @@
           </div>
 
           <!-- Tercera Imagen -->
-          <div class="carousel-item">
+          <div class="carousel-item" alt="Video de fondo con la hamburguesa La Brava, con carne a la parrilla con un toque picante irresistible.">
             <video
               class="d-block w-100"
               style="height: 400px; object-fit: cover"
@@ -322,6 +325,7 @@
               muted
               playsinline
               poster="./img/labrava_apa.webp"
+              aria-label="Video de fondo con la hamburguesa La Brava, con carne a la parrilla con un toque picante irresistible."
             >
               <source src="./videos/Burgerad2.mp4" type="video/mp4" />
               Tu navegador no soporta videos.
@@ -417,10 +421,9 @@
         <div class="card shadow-lg border-0">
           <div class="row g-0">
             <!-- Imagen a la izquierda -->
-            <div class="col-md-5">
+            <div class="col-md-5" alt="Video de presentación de Iberican Burger donde podras ver nuestro restaurante, amigos y nuestra comida con una musica suave de fondo."
+            >
               <video
-                alt="Video de presentación de Iberican Burger donde podras ver nuestro restaurante, amigos y nuestra comida con una musica suave de fondo."
-                aria-label="Video de presentación de Iberican Burger"
                 class="img-fluid rounded-start lozad"
                 style="height: 100%; object-fit: cover"
                 controls
