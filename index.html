@@ -10,9 +10,8 @@
       body {
         opacity: 1;
         transition: opacity 0.3s;
-          overflow-x: hidden;
+        overflow-x: hidden;
       }
-
     </style>
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
     <link rel="stylesheet" href="bootstrap-5.3.3/scss/personalizado.css" />
@@ -37,6 +36,9 @@
           const nuevoIdioma = idiomaLabel.textContent === "ES" ? "en" : "es";
           idiomaLabel.textContent = nuevoIdioma.toUpperCase();
 
+          // Cambiar la etiqueta lang de la etiqueta html al cambiar de idioma de en a es
+          document.documentElement.setAttribute("lang", nuevoIdioma);
+          
           // Seleccionar todos los elementos con data-es y data-en
           const elementos = document.querySelectorAll("[data-es][data-en]");
 
@@ -263,7 +265,10 @@
 
         <div class="carousel-inner">
           <!-- Primera Imagen -->
-          <div class="carousel-item active" alt="Video de preparacion de la hamburguesa Iberican Xtreme con ingredientes premium.">
+          <div
+            class="carousel-item active"
+            alt="Video de preparacion de la hamburguesa Iberican Xtreme con ingredientes premium."
+          >
             <video
               class="d-block w-100"
               style="height: 400px; object-fit: cover"
@@ -294,7 +299,9 @@
           </div>
 
           <!-- Segunda Imagen -->
-          <div class="carousel-item" aria-abel="Imagen estatica de la hamburguesa Castaña, con ingredientes de temporada."
+          <div
+            class="carousel-item"
+            aria-abel="Imagen estatica de la hamburguesa Castaña, con ingredientes de temporada."
           >
             <img
               src="./img/castana_apa.webp"
@@ -319,7 +326,10 @@
           </div>
 
           <!-- Tercera Imagen -->
-          <div class="carousel-item" alt="Video de fondo con la hamburguesa La Brava, con carne a la parrilla con un toque picante irresistible.">
+          <div
+            class="carousel-item"
+            alt="Video de fondo con la hamburguesa La Brava, con carne a la parrilla con un toque picante irresistible."
+          >
             <video
               class="d-block w-100"
               style="height: 400px; object-fit: cover"
@@ -424,7 +434,9 @@
         <div class="card shadow-lg border-0">
           <div class="row g-0">
             <!-- Imagen a la izquierda -->
-            <div class="col-md-5" alt="Video de presentación de Iberican Burger donde podras ver nuestro restaurante, amigos y nuestra comida con una musica suave de fondo."
+            <div
+              class="col-md-5"
+              alt="Video de presentación de Iberican Burger donde podras ver nuestro restaurante, amigos y nuestra comida con una musica suave de fondo."
             >
               <video
                 class="img-fluid rounded-start lozad"
